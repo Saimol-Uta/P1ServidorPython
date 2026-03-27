@@ -22,7 +22,7 @@ def get_productos():
     try:
         conn = get_connection()
         cursor = conn.cursor()
-        cursor.execute("select Id, Nombre, Precio from productos")
+        cursor.execute("select Id, Nombre, Precio, Stock from productos")
         rows = cursor.fetchall()
 
         productos = []
@@ -30,7 +30,8 @@ def get_productos():
             productos.append({
                 "id": row.Id,
                 "nombre": row.Nombre,
-                "precio": row.Precio
+                "precio": float(row.Precio),
+                "stock": int(row.Stock)
             })
         
         cursor.close()
